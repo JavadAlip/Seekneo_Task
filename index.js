@@ -12,16 +12,17 @@ async function generateExcel() {
     { header: 'Name', key: 'name' },
     { header: 'Email', key: 'email' },
     { header: 'Age', key: 'age' },
+    { header: 'Place', key: 'place' },
   ];
 
-  //map to add rows
   dummyData.map(item => worksheet.addRow(item));
 
   await workbook.xlsx.writeFile('dummy-data.xlsx');
   console.log('Excel file generated: dummy-data.xlsx');
 }
 
-//Generate PDF File
+
+// Generate PDF File in Table Format
 function generatePDF() {
   const doc = new PDFDocument({ margin: 50 });
   const writeStream = fs.createWriteStream('dummy-data.pdf');
@@ -29,30 +30,37 @@ function generatePDF() {
 
   // Title
   doc.fontSize(18).text('Dummy Data List', { align: 'center', underline: true });
-  doc.moveDown(1);
+  doc.moveDown(2);
 
-  // Header
+  // Set starting Y position
+  const startY = doc.y;
+  const rowHeight = 25;
+  const columnSpacing = [50, 150, 350,450]; 
+
+  // Table headers
   doc.fontSize(12).font('Helvetica-Bold');
-  doc.text('Name', 50, doc.y, { continued: true });
-  doc.text('Email', 200, doc.y, { continued: true });
-  doc.text('Age', 400);
-  doc.moveDown(0.5);
-  doc.moveTo(50, doc.y).lineTo(500, doc.y).stroke();
+  doc.text('Name', columnSpacing[0], startY);
+  doc.text('Email', columnSpacing[1], startY);
+  doc.text('Age', columnSpacing[2], startY);
+  doc.text('Place', columnSpacing[3], startY);
 
-  // Rows
+  doc.moveTo(50, startY + 18).lineTo(550, startY + 18).stroke();
+
+  // Table rows
   doc.font('Helvetica');
-  dummyData.map(item => {
-    doc.text(item.name, 50, doc.y, { continued: true });
-    doc.text(item.email, 200, doc.y, { continued: true });
-    doc.text(String(item.age), 400);
+  dummyData.map((item, index) => {
+    const y = startY + 25 + index * rowHeight;
+    doc.text(item.name, columnSpacing[0], y);
+    doc.text(item.email, columnSpacing[1], y);
+    doc.text(String(item.age), columnSpacing[2], y);
+    doc.text(item.place, columnSpacing[3], y);
   });
 
   doc.end();
-  console.log('✅ PDF file generated with fixed column layout.');
+  console.log('PDF file generated: dummy-data.pdf');
 }
 
-
-//Run both
+// Run both
 async function generateFiles() {
   await generateExcel();
   generatePDF();

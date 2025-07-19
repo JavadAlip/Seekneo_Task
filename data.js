@@ -1,4 +1,3 @@
-
 const dummyData = [
   { name: "John Doe", email: "john@example.com", age: 28, place: "Kerala" },
   { name: "Jane Smith", email: "jane@example.com", age: 34, place: "Mumbai"  },
