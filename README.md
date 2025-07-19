@@ -13,34 +13,39 @@ Tech Stack
 
 Project Structure
 
-SeekNeo-Task
-├── data.js # Dummy user data (array of objects)
-├── index.js # Main script to generate PDF and Excel files
-├── dummy-data.pdf # Generated PDF file (after running the script)
-├── dummy-data.xlsx # Generated Excel file (after running the script)
-├── package.json # Project metadata and dependencies
-└── README.md # Project documentation
+1- SeekNeo-Task
+data.js - Dummy user data (array of objects)
+index.js - Main script to generate PDF and Excel files
+dummy-data.pdf - Generated PDF file (after running the script)
+dummy-data.xlsx - Generated Excel file (after running the script)
+package.json - Project metadata and dependencies
+README.md - Project documentation
 
 
 1- Output Format
 Fields Included: name, Email, Age, Place
+
 
 2- PDF Output:
 Styled like a table using X/Y coordinates
 Column headers: Name, Email, Age, Place
 Each row represents one user
 
+
 3- Excel Output:
 Clean column headers with user data
 One row per entry
 Created using ExcelJS
 
+
 4- Task Status
 This task is fully completed as per the requirements. Both the PDF and Excel file are auto-generated using real dummy data.
 (The generated files are included in the repository for review)
 
+
 Author
-Javad Ali
+Javad Ali P
+
 
 License
 This project is created for demonstration/interview task purposes only. No commercial license is included.
